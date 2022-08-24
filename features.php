@@ -1,5 +1,5 @@
 <?php $sideTitlen = 'KilometerJournalen i PHP';
-$db = new DB();
+
 include('bootstrap.php');
 $table = new Table(); ?>
     <main class="page">
@@ -29,7 +29,6 @@ $table = new Table(); ?>
     <script>
     function printDiv(divName) {
      var printContents = document.getElementById(divName).innerHTML;
-     var originalContents = document.body.innerHTML;
      document.body.innerHTML = printContents;
      window.print();
     }</script><?php } ?>

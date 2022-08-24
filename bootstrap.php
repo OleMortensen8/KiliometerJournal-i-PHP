@@ -1,5 +1,6 @@
 <?php 
 include('classes/autoload.php');
+$db = new DB();
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
         if(isset($_POST['data'])){
                 $data = $_POST['data'];
