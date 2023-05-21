@@ -9,7 +9,7 @@
        public function DBCONNECT(){
         try{
             return new PDO($this->hostname, $this->username, $this->password, $this->options);
-        }catch(Exeception $e){
+        }catch(Exception $e){
             return $e->getmessage();
         }
     }
@@ -31,7 +31,9 @@
     }
 
     public function deleteEntry($id){
-        $this->DBCONNECT()->query("DELETE FROM kiliometerliste WHERE EntryID = $id");
+       $statement = $this->DBCONNECT()->prepare("DELETE FROM kiliometerliste WHERE EntryID=:id");
+       $statement->bindParam(':id', $id, PDO::PARAM_INT);
+         $statement->execute();
     } 
 }
 ?>
