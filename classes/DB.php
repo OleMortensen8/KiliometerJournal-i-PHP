@@ -31,9 +31,9 @@
     }
 
     public function deleteEntry($id){
-       $statement = $this->DBCONNECT()->prepare("DELETE FROM kiliometerliste WHERE EntryID=:id");
-       $statement->bindParam(':id', $id, PDO::PARAM_INT);
-         $statement->execute();
+        $statement = $this->DBCONNECT()->prepare("DELETE FROM kiliometerliste WHERE EntryID=:id");
+        $statement->bindParam(':id', $id, PDO::PARAM_INT);
+        $statement->execute();
     } 
 }
 ?>
