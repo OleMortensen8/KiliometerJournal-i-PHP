@@ -1,4 +1,5 @@
-<?php $sideTitlen = 'KilometerJournalen i PHP'; 
+<?php
+$sideTitlen = 'KilometerJournalen i PHP'; 
  include('bootstrap.php');?>
     <main class="page">
         <section class="clean-block features">
