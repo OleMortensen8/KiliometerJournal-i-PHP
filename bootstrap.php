@@ -1,7 +1,8 @@
 <?php
 require "vendor/autoload.php";
 require 'classes/autoload.php';
-
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+$dotenv->load();
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (isset($_POST['data'])) {
         $data = $_POST['data'];

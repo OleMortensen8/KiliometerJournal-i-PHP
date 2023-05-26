@@ -8,7 +8,10 @@
         
        public function DBCONNECT(){
         try{
-            return new PDO($this->hostname, $this->username, $this->password, $this->options);
+            return new PDO(sprintf('mysql:host=%s;dbname=%s', getenv('HOST'), getenv('DATABASE')),
+            getenv('USERNAME'),
+            getenv('PASSWORD'), $this->options,
+            );
         }catch(Exception $e){
             return $e->getmessage();
         }
