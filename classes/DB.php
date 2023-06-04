@@ -1,8 +1,8 @@
 <?php class DB{
     
-    private $hostname = '',
-        $username = '',
-        $password = '',
+    private $hostname = $_ENV['HOST'], //localhost
+        $username = $_ENV['USERNAME'],  //root
+        $password = $_ENV['PASSWORD'], //NULL
         $options = array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8',
     );
         
