@@ -3,6 +3,7 @@ require "vendor/autoload.php";
 require 'classes/autoload.php';
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
 $dotenv->load();
+$db = new DB();
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (isset($_POST['data'])) {
         $data = $_POST['data'];
@@ -12,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $ini = $_POST['ini'];
         $kmStart = $_POST['kmStart'];
         $kmStop = $_POST['kmStop'];
-        $samledetal = $kmStop-$kmStart;
+        $samledetal = $kmStop - $kmStart;
         $db->sendsDataToSql($ini, $kmStart, $kmStop, $samledetal);
     }
 }
