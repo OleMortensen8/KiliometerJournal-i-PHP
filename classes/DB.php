@@ -30,7 +30,7 @@ class DB {
             $statement->bindParam(3, $kmStop, PDO::PARAM_INT);
             $statement->bindParam(4, $samledetal, PDO::PARAM_INT);
             $statement->execute();
-            header("Location: features.php");
+            return true;
         } catch (PDOException $e) {
             echo "Error: " . $e->getMessage();
         }

@@ -14,7 +14,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $kmStart = $_POST['kmStart'];
         $kmStop = $_POST['kmStop'];
         $samledetal = $kmStop - $kmStart;
-        $db->sendsDataToSql($ini, $kmStart, $kmStop, $samledetal);
+        if($db->sendsDataToSql($ini, $kmStart, $kmStop, $samledetal)){
+            header("Location: features.php");
+            exit();
+        }
+
     }
 }
 require 'views/header.php';
