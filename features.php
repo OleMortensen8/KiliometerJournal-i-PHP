@@ -36,6 +36,7 @@ $sideTitlen = 'KilometerJournalen i PHP';
                         
                     </div>
                 </div>
+        <canvas id="myChart"></canvas>
             </div>
         </section>
     </main>
