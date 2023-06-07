@@ -4,7 +4,21 @@
             <p style="height:24px;margin-top:10px;">© <?php echo  date('Y', strtotime('Now'));  ?> Copyright</p>
         </div>
     </footer>
-    <script>
+
+<!-- Include jQuery library -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<!-- Then load bootstrap bundle -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
+
+<!-- Load the Chart.js library -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<!-- Then, your own scripts -->
+<script src="assets/js/script.min.js"></script>
+
+<!-- Custom JavaScript/jQuery code -->
+<script>
 $(document).ready(function() {
     $.getJSON("data.php", function(result){
         var ctx = document.getElementById('myChart').getContext('2d');
@@ -30,10 +44,7 @@ $(document).ready(function() {
         });
     });
 });
+</script>
 
-    </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
-    <script src="assets/js/script.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </body>
 </html>
