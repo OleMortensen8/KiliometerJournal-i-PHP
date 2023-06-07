@@ -5,24 +5,19 @@
         </div>
     </footer>
     <script>
- window.onload = function() {
-    var labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
-    var data = [10, 20, 30, 40, 50, 60, 70];
-
-    if (labels.length === 0 || data.length === 0) {
-        console.log("No data available for chart");
-    } else {
+$(document).ready(function() {
+    $.getJSON("data.php", function(result){
         var ctx = document.getElementById('myChart').getContext('2d');
         var myChart = new Chart(ctx, {
             type: 'line',
             data: {
-                labels: labels,
+                labels: result.labels,
                 datasets: [{
-                    label: 'Monthly Sales',
-                    data: data,
-                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                    borderColor: 'rgba(75, 192, 192, 1)',
-                    borderWidth: 1
+                    label: 'Dataset Label',
+                    data: result.data,
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)', // color of the fill (under the line)
+                    borderColor: 'rgba(75, 192, 192, 1)', // color of the line
+                    borderWidth: 1 // thickness of the line
                 }]
             },
             options: {
@@ -33,9 +28,10 @@
                 }
             }
         });
-    }
-}
-</script>
+    });
+});
+
+    </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
     <script src="assets/js/script.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
