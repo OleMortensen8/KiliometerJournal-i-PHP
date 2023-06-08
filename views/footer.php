@@ -20,14 +20,26 @@
 <!-- Custom JavaScript/jQuery code -->
 <script>
 $(document).ready(function() {
+    refreshTable();
+    setInterval(refreshTable, 5000); // refresh table every 5 seconds
+});
+
+function refreshTable() {
+    $.get("fetch_table_data.php", function(data) {
+        $("#printableArea").html(data);
+    });
+}
+</script>
+<script>
+$(document).ready(function() {
     $.getJSON("data.php", function(result){
         var ctx = document.getElementById('myChart').getContext('2d');
         var myChart = new Chart(ctx, {
-            type: 'line',
+            type: 'bar',
             data: {
                 labels: result.labels,
                 datasets: [{
-                    label: 'Dataset Label',
+                    label: 'Samlede antal',
                     data: result.data,
                     backgroundColor: 'rgba(75, 192, 192, 0.2)', // color of the fill (under the line)
                     borderColor: 'rgba(75, 192, 192, 1)', // color of the line
