@@ -12,12 +12,11 @@ try {
     // Set the PDO error mode to exception
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    // Query to fetch chart data from the last three months
     $query = "SELECT DATE_FORMAT(dato, '%M') AS dato, SUM(samledeKmTal) AS samledeKmTal
     FROM Kiliometer_liste.Kiliometer_liste kl
-    WHERE dato > DATE_SUB(NOW(), INTERVAL 3 MONTH)
+    WHERE dato >= DATE_SUB(CURDATE(), INTERVAL 2 MONTH)
     GROUP BY DATE_FORMAT(dato, '%Y-%m')
-    ORDER BY dato ASC";
+    ORDER BY DATE_FORMAT(dato, '%Y-%m') ASC";
 
     // Prepare and execute the query
     $stmt = $conn->prepare($query);
