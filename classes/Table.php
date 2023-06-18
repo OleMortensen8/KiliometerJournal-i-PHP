@@ -17,35 +17,33 @@ class Table {
                 </tr>   
             </thead>
             <tbody>';
-
+    $totalliter = 0;
     foreach ($lists as $list) {
         $fuelConsumptionPerKm = 0.04292;
-$totalKmDriven = $list["samledeKmTal"];
-$liter = $fuelConsumptionPerKm * $totalKmDriven;
-
-$tankCapacity = 44;
-$threshold = 2;
-
-$remainingFuel = $tankCapacity - $liter;
-
-if ($remainingFuel <= $threshold) {
-    echo "Fuel level is nearing empty. Please refuel soon!";
-}
-            $this->table .= "<tr>" .
-                "<td>" . $list["initialer"] . "</td>" .
-                "<td>" . $list["kmStart"] . "</td>" .
-                "<td>" . $list["kmSlut"] . "</td>" .
-                "<td>" . $list["samledeKmTal"] . "</td>" .
-                "<td>" . $liter . "</td>" .
-                "<td>" . $list["dato"] . "</td>" .
-                "<td>
-                    <form action='' method='post'>
-                        <button class='btn btn-danger' type='submit' name='data' value='" . $list['EntryID'] . "'>Delete</button>
-                    </form>
-                </td>" .
-                "</tr>";
-        }
-
+        $totalKmDriven = $list["samledeKmTal"];
+        $liter = $fuelConsumptionPerKm * $totalKmDriven;
+        $tankCapacity = 44;
+        $threshold = 2;
+       
+        $this->table .= "<tr>" .
+            "<td>" . $list["initialer"] . "</td>" .
+            "<td>" . $list["kmStart"] . "</td>" .
+            "<td>" . $list["kmSlut"] . "</td>" .
+            "<td>" . $list["samledeKmTal"] . "</td>" .
+            "<td>" . $liter . "</td>" .
+            "<td>" . $list["dato"] . "</td>" .
+            "<td>
+                <form action='' method='post'>
+                    <button class='btn btn-danger' type='submit' name='data' value='" . $list['EntryID'] . "'>Delete</button>
+                </form>
+            </td>" .
+            "</tr>";
+    $totalliter += $liter;
+    $remainingFuel = $tankCapacity - $totalliter;
+    }
+    if ($remainingFuel < $threshold) {
+        echo "Fuel level is nearing empty. Please refuel soon!";
+    }
         $this->table .= '</tbody>';
 
         $this->allTogether = 0;
@@ -57,7 +55,7 @@ if ($remainingFuel <= $threshold) {
         $pos = date("n", strtotime("now"));
         $this->table .= '<tfoot>
             <th scope="row">Kørt på i ' . $maaneder[$pos] . '</th>
-            <td>' . $this->allTogether . ' km</td>
+            <td>' . $this->allTogether . ' km/'. $totalliter . 'L</td>
         </tfoot>';
 
         $this->table .= '</table>';

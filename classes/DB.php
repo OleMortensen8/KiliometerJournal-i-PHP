@@ -37,7 +37,7 @@ class DB {
     }
 
     public function getDataToSql() {
-        $statement = $this->DBCONNECT()->query("SELECT * FROM Kiliometer_liste ORDER BY EntryID DESC LIMIT 5");
+        $statement = $this->DBCONNECT()->query("SELECT * FROM Kiliometer_liste ORDER BY EntryID DESC");
         return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
 
