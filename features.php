@@ -13,7 +13,6 @@ $sideTitlen = 'KilometerJournalen i PHP';
                 <div>
                     <div class="table-responsive">
                         <div id="printableArea">
-                                <table class="table">
                                     <?php $table->createTable($db->getDataToSql());
                                     if($db->getDataToSql()){
                                     echo $table->getTable();
