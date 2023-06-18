@@ -4,7 +4,7 @@ class Table {
     private $allTogether;
 
     public function createTable($lists) {
-        $this->table = '<table>
+        $this->table = '<table style="width:100%;">
             <thead>
                 <tr>
                     <th>Initialer</th>
@@ -12,17 +12,31 @@ class Table {
                     <th>km - stop</th>
                     <th>km kørt</th>
                     <th>registreret</th>
+                    <th>Liters/Total km.</th>
                     <th>Deletes</th>
                 </tr>   
             </thead>
             <tbody>';
 
-        foreach ($lists as $list) {
+    foreach ($lists as $list) {
+        $fuelConsumptionPerKm = 0.04292;
+$totalKmDriven = $list["samledeKmTal"];
+$liter = $fuelConsumptionPerKm * $totalKmDriven;
+
+$tankCapacity = 44;
+$threshold = 2;
+
+$remainingFuel = $tankCapacity - $liter;
+
+if ($remainingFuel <= $threshold) {
+    echo "Fuel level is nearing empty. Please refuel soon!";
+}
             $this->table .= "<tr>" .
                 "<td>" . $list["initialer"] . "</td>" .
                 "<td>" . $list["kmStart"] . "</td>" .
                 "<td>" . $list["kmSlut"] . "</td>" .
                 "<td>" . $list["samledeKmTal"] . "</td>" .
+                "<td>" . $liter . "</td>" .
                 "<td>" . $list["dato"] . "</td>" .
                 "<td>
                     <form action='' method='post'>
