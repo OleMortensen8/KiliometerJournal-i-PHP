@@ -14,7 +14,7 @@ KiliometerJournal-i-PHP is a PHP-based web application designed to simplify kilo
 
 To get started with KiliometerJournal-i-PHP, follow these steps:
 
-1. Clone the repository: `git clone https://github.com/your-username/KiliometerJournal-i-PHP.git`
+1. Clone the repository: `git clone https://github.com/OleMortensen8/KiliometerJournal-i-PHP.git`
 2. Configure your PHP environment.
 3. Set up a database to store the application data.
 4. Customize the application settings as needed.
