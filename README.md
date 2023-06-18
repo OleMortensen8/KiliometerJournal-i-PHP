@@ -5,9 +5,7 @@ KiliometerJournal-i-PHP is a PHP-based web application designed to simplify kilo
 ## Features
 
 - **Kilometer Tracking:** Record and monitor the distance covered during your trips.
-- **Travel Journal:** Capture memorable experiences with detailed notes and attached images.
 - **Analytics and Insights:** Gain valuable insights into your travel habits through intuitive analytics.
-- **User Management:** Create and manage user profiles securely.
 - **Responsive Design:** Access your travel journal from any device with a responsive interface.
 
 ## Getting Started
