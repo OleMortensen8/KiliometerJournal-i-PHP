@@ -1,10 +1,23 @@
-<?php
-class Table {
-    private $table = "<p>Data kommer snart</p>";
-    private $allTogether;
+<?php 
 
-    public function createTable($lists) {
-        $this->table = '<table style="width:100%;">
+// Define constants
+define('FUEL_CONSUMPTION_PER_KM', 0.04292);
+define('TANK_CAPACITY', 44);
+define('THRESHOLD', 2);
+
+class Table 
+{
+    private $htmlTable = "<p>Data kommer snart</p>"; // 📌 HTML table string
+    private $totalKilometersDriven; // 📌 Total kilometers driven
+
+    public function createTable($entries) 
+    { 
+        // Initialize total fuel consumed
+        $totalFuelConsumed = 0; 
+
+        // Start building the table
+        $this->htmlTable = '
+            <table style="width:100%;">
             <thead>
                 <tr>
                     <th>Initialer</th>
@@ -14,54 +27,72 @@ class Table {
                     <th>registreret</th>
                     <th>Liters/Total km.</th>
                     <th>Deletes</th>
-                </tr>   
+                </tr>
             </thead>
             <tbody>';
-    $totalliter = 0;
-    foreach ($lists as $list) {
-        $fuelConsumptionPerKm = 0.04292;
-        $totalKmDriven = $list["samledeKmTal"];
-        $liter = $fuelConsumptionPerKm * $totalKmDriven;
-        $tankCapacity = 44;
-        $threshold = 2;
-       
-        $this->table .= "<tr>" .
-            "<td>" . $list["initialer"] . "</td>" .
-            "<td>" . $list["kmStart"] . "</td>" .
-            "<td>" . $list["kmSlut"] . "</td>" .
-            "<td>" . $list["samledeKmTal"] . "</td>" .
-            "<td>" . $liter . "</td>" .
-            "<td>" . $list["dato"] . "</td>" .
-            "<td>
-                <form action='' method='post'>
-                    <button class='btn btn-danger' type='submit' name='data' value='" . $list['EntryID'] . "'>Delete</button>
-                </form>
-            </td>" .
-            "</tr>";
-    $totalliter += $liter;
-    $remainingFuel = $tankCapacity - $totalliter;
-    }
-    if ($remainingFuel < $threshold) {
-        echo "Fuel level is nearing empty. Please refuel soon!";
-    }
-        $this->table .= '</tbody>';
 
-        $this->allTogether = 0;
-        foreach ($lists as $list) {
-            $this->allTogether += $list["samledeKmTal"];
+        // Loop through each entry to calculate and append to the table
+        foreach ($entries as $entry) 
+        {
+            $litersConsumed = FUEL_CONSUMPTION_PER_KM * $entry["samledeKmTal"];
+            $this->htmlTable .= "<tr>" .
+                "<td>" . $entry["initialer"] . "</td>" .
+                "<td>" . $entry["kmStart"] . "</td>" .
+                "<td>" . $entry["kmSlut"] . "</td>" .
+                "<td>" . $entry["samledeKmTal"] . "</td>" .
+                "<td>" . $litersConsumed . "</td>" .
+                "<td>" . $entry["dato"] . "</td>" .
+                "<td> 
+                    <form action='' method='post'> 
+                        <button class='btn btn-danger' type='submit' name='data' value='" . $entry['EntryID'] . "'>Delete</button> 
+                    </form> 
+                </td>
+            </tr>";
+            
+            // Add the liters consumed to the total
+            $totalFuelConsumed += $litersConsumed;
+
+            // Calculate remaining fuel
+            $remainingFuel = TANK_CAPACITY - $totalFuelConsumed;
+        
+            // Check if refuel is needed
+            if ($remainingFuel < THRESHOLD) 
+            {
+                echo "Fuel level is nearing empty. Please refuel soon!";
+            }
         }
 
-        $maaneder = array("", "Januar", "Febuar", "Marts", "April", "Maj", "Juni", "Juli", "August", "Okttober", "September", "November", "December");
-        $pos = date("n", strtotime("now"));
-        $this->table .= '<tfoot>
-            <th scope="row">Kørt på i ' . $maaneder[$pos] . '</th>
-            <td>' . $this->allTogether . ' km/'. $totalliter . 'L</td>
-        </tfoot>';
+        // Close the table body
+        $this->htmlTable .= '</tbody>';
 
-        $this->table .= '</table>';
+        // Reset total kilometers driven
+        $this->totalKilometersDriven = 0;
+
+        // Calculate total kilometers driven
+        foreach ($entries as $entry) 
+        {
+            $this->totalKilometersDriven += $entry["samledeKmTal"];
+        }
+
+        // Get the current month
+        $months = array("", "Januar", "Febuar", "Marts", "April", "Maj", "Juni", "Juli", "August", "Okttober", "September", "November", "December");
+        $currentMonth = date("n", strtotime("now"));
+
+        // Append the table footer
+        $this->htmlTable .= '
+            <tfoot> 
+                <th scope="row">Kørt på i ' . $months[$currentMonth] . '</th>
+                <td>' . $this->totalKilometersDriven . ' km/'. $totalFuelConsumed . 'L</td> 
+            </tfoot>';
+
+        // Close the table
+        $this->htmlTable .= '</table>';
     }
 
-    public function getTable() {
-        return $this->table;
+    // Get the HTML table
+    public function getTable() 
+    {
+        return $this->htmlTable;
     }
 }
+?>
