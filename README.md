@@ -18,7 +18,7 @@ To get started with KiliometerJournal-i-PHP, follow these steps:
 4. Customize the application settings as needed.
 5. Start using the application to track your kilometers and document your journeys.
 
-For detailed instructions and additional information, refer to the [documentation](documentation.md).
+For detailed instructions and additional information, refer to the [documentation](https://github.com/OleMortensen8/KiliometerJournal-i-PHP.wiki.git).
 
 ## Contributing
 
